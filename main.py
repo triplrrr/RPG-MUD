@@ -12,7 +12,7 @@ rooms = {
         "exits": {"tavern": "Tavern", "blacksmith": "Blacksmith"},
     },
     "Tavern": {
-        "description": "You're in the Boar's Tooth Tavern. There are several tables and a bar. ",
+        "description": "You're in the Boar's Tooth Tavern. There are several tables and a bar. There is a sign that says \"Area is a WIP\". ",
         "exits": {"outside": "Riven"},
     },
     "Blacksmith": {
