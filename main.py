@@ -202,7 +202,7 @@ while True:
             if params in players[id]["money"].keys():
                 mud.send_message(id, "You have {} {} pieces".format(players[id]["money"][params], params))
             else:
-                mud.send_message(id, "You have {} gp, {} sp, and {} cp".format(players[id]["money"]["gold"], players[id]["money"]["silver"], players[id]["money"]["copper"]))
+                mud.send_message(id, "You have {} ep, {} pp, {} gp, {} sp, and {} cp".format(players[id]["money"]["electrum"], players[id]["money"]["platinum"], players[id]["money"]["gold"], players[id]["money"]["silver"], players[id]["money"]["copper"]))
         else :
             # send back an 'unknown command' message
             mud.send_message(id, "Unknown command '{}'".format(command))
