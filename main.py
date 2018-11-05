@@ -1,11 +1,21 @@
 #!/usr/bin/env python
 import time
 
+# import the json library to read from JSON files
+import json
+
+#import the copy module
+from copy import deepcopy
+
 # import the MUD server class
 from mudserver import MudServer
 
+with open('config.json') as f:
+    data = json.load(f)
+
 # structure defining the rooms in the game. Try adding more rooms to the game!
-rooms = {
+rooms =  data["areas"]
+"""{
     "Riven": {
         "description": "You are in the city of Riven, a simple town with a blacksmith and a tavern. The tavern is well known for it's cooking. There is a sign that says \"Area is a WIP\". ",
         "exits": {"tavern": "Tavern", "blacksmith": "Blacksmith"},
@@ -18,16 +28,17 @@ rooms = {
         "description": "You're in the Riven Blacksmith. Swords line the walls. There is a sign that says \"Area is a WIP\". ",
         "exits": {"outside": "Riven"}
     }
-}
+}"""
 
-default_room = "Riven"
-money_conversion = {
+money_conversion = data["conversion"]
+"""
+{
     "electrum": {"electrum":      1, "platinum":    10, "gold":  100, "silver": 1000, "copper": 10000},
     "platinum": {"electrum":    0.1, "platinum":     1, "gold":   10, "silver":  100, "copper":  1000},
     "gold":     {"electrum":   0.01, "platinum":   0.1, "gold":    1, "silver":   10, "copper":   100},
     "silver":   {"electrum":  0.001, "platinum":  0.01, "gold":  0.1, "silver":    1, "copper":    10},
     "copper":   {"electrum": 0.0001, "platinum": 0.001, "gold": 0.01, "silver":  0.1, "copper":     1}
-}
+}"""
 # stores the players in the game
 players = {}
 
@@ -48,7 +59,7 @@ while True:
         # Try adding more player stats - level, gold, inventory, etc
         players[id] = {
             "name": None,
-            "money": {"electrum":0, "platinum":0, "gold":5, "silver":0, "copper":0},
+            "money": data["defaults"]["money"],
             "inventory": [],
             "room": None,
         }
@@ -75,7 +86,7 @@ while True:
         # if the player hasn't given their name yet, use this first command as their name and move them to the starting room.
         if players[id]["name"] is None:
             players[id]["name"] = command
-            players[id]["room"] = default_room[:]
+            players[id]["room"] = data["defaults"]["location"] + ""
 
             # go through all the players in the game
             for pid, pl in players.items():
