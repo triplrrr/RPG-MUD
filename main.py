@@ -15,9 +15,9 @@ import sqlite3
 
 # connect to the database and initialize table if it isn't already.
 db = sqlite3.connect('userdata.db')
-c = conn.cursor()
+c =  db.cursor()
 c.execute("""CREATE TABLE IF NOT EXISTS some_table
-            (id CHAR(20) PRIMARY KEY, password CHAR(128), data CLOB(20M));""")
+            (id CHAR(20) PRIMARY KEY, password CHAR(128), data CHAR LARGE OBJECT(20971520));""")
 
 # Read data from the config file
 with open('config.json') as f:
